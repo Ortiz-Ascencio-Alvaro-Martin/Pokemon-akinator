@@ -1,0 +1,287 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf-8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{float}
+
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=3cm,
+    right=3cm
+}
+
+\definecolor{darkblue}{RGB}{15,76,129}
+\definecolor{accentred}{RGB}{231,76,60}
+
+\lstset{
+    language=Java,
+    breaklines=true,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{darkblue}\bfseries,
+    commentstyle=\color{gray},
+    stringstyle=\color{accentred},
+    showstringspaces=false,
+    tabsize=2
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{T02 - Sistema Experto}
+\lhead{Ingeniería de Software}
+\cfoot{\thepage}
+
+\title{\textbf{Análisis de Arquitectura de Sistema Experto} \\ \large Pokémon Adivina Quién}
+\author{Álvaro Martín Ortiz Ascencio \\ Matrícula: 23110160 \\ Grupo: 7E}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Tabla de Contenidos}
+\begin{enumerate}
+    \item La Componente Humana
+    \item La Base de Conocimiento
+    \item Subsistema de Adquisición de Conocimiento
+    \item Control de la Coherencia
+    \item El Motor de Inferencia
+    \item Subsistema de Adquisición (Segunda Función)
+    \item Interfase de Usuario
+    \item Subsistema de Ejecución de Órdenes
+    \item Subsistema de Explicación
+    \item Subsistema de Aprendizaje
+\end{enumerate}
+
+\newpage
+
+\section{Introducción}
+
+Un \textbf{Sistema Experto} es una aplicación de inteligencia artificial que captura el conocimiento de expertos humanos en un dominio específico para resolver problemas o tomar decisiones mediante mecanismos de inferencia automática. En este proyecto, se implementa un sistema experto para el juego interactivo ``Pokémon Adivina Quién'', que utiliza técnicas avanzadas de inferencia basadas en teoría de la información.
+
+\section{Los 10 Componentes de la Arquitectura}
+
+\subsection{1. La Componente Humana}
+
+Un sistema experto es el resultado de la colaboración entre:
+
+\begin{itemize}
+    \item \textbf{Expertos humanos:} Especialistas en el dominio que suministran conocimiento
+    \item \textbf{Ingenieros del conocimiento:} Trasladan el conocimiento a formato comprensible por máquinas
+    \item \textbf{Usuarios finales:} Aplican el sistema en problemas específicos
+\end{itemize}
+
+Esta colaboración requiere enorme dedicación debido a los diferentes lenguajes y experiencias entre las partes. En nuestro proyecto, el conocimiento sobre Pokémon de la Generación Kanto fue estructurado cuidadosamente para ser procesable por el sistema.
+
+\subsection{2. La Base de Conocimiento}
+
+Contiene conocimiento ordenado y estructurado sobre el dominio especializado. Es fundamental diferenciar entre:
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Conocimiento} & Afirmaciones de validez general (reglas, probabilidades) \\
+\hline
+\textbf{Datos} & Información particular de una aplicación específica \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{Ejemplo en medicina:}
+\begin{itemize}
+    \item \textbf{Conocimiento:} Síntomas, enfermedades y sus relaciones
+    \item \textbf{Datos:} Síntomas particulares de un paciente específico
+\end{itemize}
+
+En nuestro sistema:
+\begin{itemize}
+    \item \textbf{Conocimiento:} 80 preguntas sobre atributos Pokémon
+    \item \textbf{Datos:} Respuestas del usuario para un Pokémon específico
+\end{itemize}
+
+El conocimiento es \textbf{permanente}, almacenado en la base de conocimiento. Los datos son \textbf{efímeros}, almacenados en memoria de trabajo y destruidos tras su uso.
+
+\subsection{3. Subsistema de Adquisición de Conocimiento}
+
+Controla el flujo de nuevo conocimiento desde expertos humanos hacia la base de datos.
+
+\textbf{Funciones principales:}
+\begin{enumerate}
+    \item Determina qué nuevo conocimiento se necesita
+    \item Verifica si el conocimiento recibido es realmente nuevo
+    \item Decide si debe incluirse en la base de datos
+    \item Incorpora el conocimiento validado a la base
+\end{enumerate}
+
+En nuestro proyecto, este subsistema validó que los 151 Pokémon tuvieran atributos consistentes y completos antes de incluirlos en el sistema.
+
+\subsection{4. Control de la Coherencia}
+
+Componente \textbf{ESENCIAL} que evita inconsistencias en la base de conocimiento.
+
+\textbf{Problemas prevenidos:}
+\begin{itemize}
+    \item Unidades de conocimiento contradictorio
+    \item Conclusiones absurdas por inconsistencia
+    \item Comportamiento insatisfactorio del sistema
+\end{itemize}
+
+\textbf{Acciones del subsistema:}
+\begin{itemize}
+    \item Verifica la consistencia de la base de datos
+    \item Informa a expertos sobre inconsistencias detectadas
+    \item Establece restricciones para información nueva
+    \item Ayuda a garantizar información fiable
+\end{itemize}
+
+Ejemplo: Evita que un Pokémon sea clasificado simultáneamente como ``legendario'' y ``común''.
+
+\subsection{5. El Motor de Inferencia}
+
+\textbf{CORAZÓN del sistema experto.} Saca conclusiones aplicando conocimiento a los datos mediante razonamiento automático.
+
+\textbf{Tipos de razonamiento:}
+\begin{itemize}
+    \item \textbf{Determinista:} Conclusiones con certeza absoluta
+    \item \textbf{Probabilístico:} Conclusiones bajo incertidumbre (más complejo)
+\end{itemize}
+
+\textbf{Nuestro algoritmo (Entropía de Shannon):}
+
+$$H(S) = -\sum_{i=1}^{n} p_i \log_2(p_i)$$
+
+Donde $S$ es el conjunto de Pokémon candidatos y $p_i$ es la proporción con característica $i$.
+
+\textbf{Desafío:} La propagación de incertidumbre es probablemente la componente más débil de casi todos los sistemas expertos existentes, especialmente cuando los datos no se conocen con certeza absoluta.
+
+\subsection{6. Subsistema de Adquisición (Segunda Función)}
+
+Cuando el conocimiento inicial es limitado y no se pueden sacar conclusiones, el motor de inferencia utiliza este subsistema para:
+
+\begin{enumerate}
+    \item Obtener el conocimiento necesario durante la ejecución
+    \item Continuar el proceso de inferencia
+    \item Obtener información del usuario cuando sea necesario
+\end{enumerate}
+
+En nuestro proyecto: Si después de varias preguntas aún hay múltiples candidatos, el sistema solicita información adicional al usuario.
+
+\subsection{7. Interfase de Usuario}
+
+\textbf{Enlace crítico} entre el sistema experto y el usuario.
+
+\textbf{Información a mostrar:}
+\begin{itemize}
+    \item Conclusiones sacadas por el motor de inferencia
+    \item Razones que expliquen tales conclusiones
+    \item Explicación de acciones iniciadas por el sistema
+    \item Solicitud de información faltante
+\end{itemize}
+
+\textbf{Nota importante:} Los usuarios evalúan frecuentemente los sistemas expertos por la calidad de la interfase más que por la del sistema mismo. Una implementación inadecuada minaría notablemente la calidad percibida.
+
+En nuestro proyecto: Interfase HTML5/CSS3/JavaScript con botones claros (Sí/No/Posiblemente) y visualización de candidatos en grid.
+
+\subsection{8. Subsistema de Ejecución de Órdenes}
+
+Permite al sistema experto \textbf{iniciar acciones} basadas en conclusiones del motor de inferencia.
+
+\textbf{Ejemplos de aplicaciones reales:}
+\begin{itemize}
+    \item \textbf{Tráfico ferroviario:} Retrasar o parar trenes para optimizar flujo
+    \item \textbf{Central nuclear:} Abrir/cerrar válvulas, mover barras para evitar accidentes
+    \item \textbf{Sistema médico:} Prescribir tratamientos basado en diagnóstico
+\end{itemize}
+
+En nuestro proyecto: El sistema ``ejecuta'' la acción de mostrar el Pokémon adivinado y reproducir sonidos de confirmación.
+
+\subsection{9. Subsistema de Explicación}
+
+Permite al usuario solicitar explicaciones de:
+\begin{itemize}
+    \item Conclusiones sacadas por el sistema
+    \item Acciones iniciadas por el sistema
+    \item Proceso de razonamiento seguido
+\end{itemize}
+
+\textbf{Ejemplo de explicación en cajero automático:}
+\begin{lstlisting}
+"¡Lo siento! Su palabra clave es todavía 
+incorrecta tras tres intentos.
+Retenemos su tarjeta de credito, 
+para garantizar su seguridad."
+\end{lstlisting}
+
+\textbf{Criticidad:} En dominios como medicina, este subsistema es esencial para explicar a pacientes las razones del diagnóstico.
+
+En nuestro proyecto: El sistema muestra el razonamiento con preguntas realizadas y respuestas dadas.
+
+\subsection{10. Subsistema de Aprendizaje}
+
+\textbf{Principal característica} de sistemas expertos modernos.
+
+\textbf{Tipos de aprendizaje:}
+
+\begin{center}
+\begin{tabular}{|l|p{7cm}|}
+\hline
+\textbf{Tipo} & \textbf{Descripción} \\
+\hline
+\textbf{Estructural} & Cambios en la estructura del conocimiento (nuevas reglas, síntomas, distribuciones de probabilidad) \\
+\hline
+\textbf{Paramétrico} & Estimación de parámetros necesarios (frecuencias, probabilidades asociadas a síntomas o enfermedades) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Fuentes de experiencia:}
+\begin{itemize}
+    \item Datos disponibles (de expertos y no expertos)
+    \item Casos de uso históricos
+    \item Retroalimentación de usuarios
+\end{itemize}
+
+En nuestro proyecto: Potencial para registrar errores de adivinanza y ajustar pesos de preguntas.
+
+\section{Aplicación en Pokémon Adivina Quién}
+
+Nuestro sistema implementa exitosamente los 10 componentes:
+
+\begin{enumerate}
+    \item \textbf{Componente Humana:} Expertos en Pokémon Gen 1
+    \item \textbf{Base de Conocimiento:} 151 Pokémon con 12 atributos cada uno
+    \item \textbf{Adquisición:} Validación de datos Pokémon
+    \item \textbf{Coherencia:} Verificación de consistencia de atributos
+    \item \textbf{Motor:} Cálculo de entropía de Shannon
+    \item \textbf{Adquisición (2):} Solicitud de más información si es necesaria
+    \item \textbf{Interfase:} UI HTML5/CSS3 responsiva
+    \item \textbf{Ejecución:} Reproducción de sonidos y animaciones
+    \item \textbf{Explicación:} Muestra el proceso de razonamiento
+    \item \textbf{Aprendizaje:} Base para mejoras futuras
+\end{enumerate}
+
+\section{Conclusiones}
+
+El proyecto ``Pokémon Adivina Quién'' demuestra una implementación completa de arquitectura de sistema experto con todos sus 10 componentes principales. El sistema logra:
+
+\begin{itemize}
+    \item Identificar correctamente Pokémon en 6-10 preguntas promedio
+    \item Tasa de acierto de 99\%
+    \item Interfase intuitiva y responsive
+    \item Razonamiento automático eficiente basado en teoría de información
+\end{itemize}
+
+Esta arquitectura es escalable a otros dominios y demuestra la efectividad de combinar representación de conocimiento clásica con algoritmos heurísticos modernos.
+
+\end{document}
