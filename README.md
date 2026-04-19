@@ -14,6 +14,16 @@
 ### 2️⃣ Análisis de Arquitectura de Sistema Experto
 📋 Documentación completa sobre la arquitectura, componentes y funcionamiento de sistemas expertos.
 
+### 3️⃣ Metodologías de Manejo de Proyectos de Software
+📚 **Documento LaTeX profesional** que investiga y analiza las principales metodologías de desarrollo de software:
+- **Agile**: Iteración rápida y adaptabilidad
+- **Waterfall**: Planificación lineal y secuencial
+- **Lean**: Optimización y eliminación de desperdicios
+- **Black Belt**: Mejora continua basada en Six Sigma
+- Análisis comparativo y casos de uso prácticos
+
+📄 **Ubicación**: `T03/metodologias_software.pdf`
+
 ---
 
 ## 🎮 Pokémon Adivina Quién - Generación Kanto
