@@ -1,0 +1,162 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Ingeniería de Software}
+\lhead{Metodologías de Manejo de Proyectos}
+\cfoot{\thepage}
+
+\title{\textbf{Metodologías de Manejo de Proyectos de Software}}
+\author{Segundo Parcial - Ingeniería de Software}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+Las metodologías de manejo de proyectos de software son un conjunto de procedimientos y prácticas que permiten organizar, planificar y controlar el desarrollo de proyectos informáticos de manera eficiente. Estas metodologías proporcionan marcos de referencia que facilitan la comunicación entre equipos, establecen tiempos de entrega, aseguran la calidad del código y optimizan el uso de recursos.
+
+\section{Investigación Preliminar}
+
+\subsection{Preguntas Clave}
+
+Para comprender adecuadamente las metodologías de desarrollo de software, es fundamental responder a las siguientes preguntas:
+
+\begin{itemize}
+    \item ¿Cuántas metodologías existen?
+    \item ¿Cuáles son las principales?
+    \item ¿Qué es cada una?
+    \item ¿Para qué sirve?
+    \item ¿Cómo se implementa?
+\end{itemize}
+
+\section{Metodologías Principales}
+
+\subsection{Agile}
+
+\subsubsection{¿Qué es?}
+Agile es una metodología ágil que enfatiza la iteración rápida, la adaptabilidad y la colaboración continua con el cliente. Se basa en ciclos cortos de desarrollo (sprints) de 1 a 4 semanas.
+
+\subsubsection{¿Para qué sirve?}
+Agile es ideal para proyectos donde los requisitos pueden cambiar frecuentemente, permitiendo flexibilidad y respuesta rápida a nuevas necesidades del cliente.
+
+\subsubsection{¿Cómo se implementa?}
+\begin{itemize}
+    \item Reuniones diarias (stand-ups)
+    \item División del trabajo en historias de usuario
+    \item Sprints iterativos
+    \item Retroalimentación continua del cliente
+    \item Entrega incremental de funcionalidades
+\end{itemize}
+
+\subsection{Waterfall (Cascada)}
+
+\subsubsection{¿Qué es?}
+Waterfall es una metodología clásica y lineal donde cada fase del proyecto debe completarse antes de pasar a la siguiente (requisitos, diseño, implementación, pruebas, despliegue).
+
+\subsubsection{¿Para qué sirve?}
+Es adecuada para proyectos con requisitos bien definidos y estables, donde es importante documentación completa y planificación anticipada.
+
+\subsubsection{¿Cómo se implementa?}
+\begin{itemize}
+    \item Análisis exhaustivo de requisitos
+    \item Diseño detallado antes de la codificación
+    \item Fases secuenciales y bien definidas
+    \item Documentación extensa
+    \item Pruebas al final del desarrollo
+\end{itemize}
+
+\subsection{Lean}
+
+\subsubsection{¿Qué es?}
+Lean es una metodología que se enfoca en eliminar desperdicios y optimizar procesos, buscando entregar máximo valor con mínimos recursos.
+
+\subsubsection{¿Para qué sirve?}
+Lean es útil para mejorar la eficiencia de proyectos existentes, reducir tiempos de ciclo y aumentar la productividad del equipo.
+
+\subsubsection{¿Cómo se implementa?}
+\begin{itemize}
+    \item Identificación y eliminación de actividades sin valor
+    \item Automatización de procesos repetitivos
+    \item Mejora continua (Kaizen)
+    \item Enfoque en el flujo de trabajo
+    \item Reducción de tiempos de espera
+\end{itemize}
+
+\subsection{Black Belt (Lean Six Sigma)}
+
+\subsubsection{¿Qué es?}
+Black Belt es un nivel de certificación dentro de la metodología Six Sigma, enfocada en reducir variabilidad y defectos en procesos.
+
+\subsubsection{¿Para qué sirve?}
+Black Belt se utiliza para proyectos de mejora de procesos complejos, garantizando calidad mediante análisis estadístico riguroso.
+
+\subsubsection{¿Cómo se implementa?}
+\begin{itemize}
+    \item Análisis estadístico detallado (DMAIC)
+    \item Medición de variabilidad
+    \item Implementación de controles de calidad
+    \item Documentación de mejoras
+    \item Capacitación del equipo
+\end{itemize}
+
+\section{Otras Metodologías Relevantes}
+
+\subsection{DevOps}
+Enfocada en integración continua, automatización de despliegues y colaboración entre desarrollo y operaciones.
+
+\subsection{Scrum}
+Framework ágil que complementa a Agile con roles definidos (Product Owner, Scrum Master) y ceremonias específicas.
+
+\subsection{Kanban}
+Sistema visual de gestión de tareas que limita el trabajo en progreso y optimiza el flujo continuo.
+
+\subsection{Extreme Programming (XP)}
+Metodología que enfatiza prácticas técnicas de excelencia como pair programming, test-driven development y integración continua.
+
+\section{Comparativa y Análisis}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Metodología} & \textbf{Flexibilidad} & \textbf{Documentación} & \textbf{Velocidad} \\
+\hline
+Agile & Alta & Media & Alta \\
+\hline
+Waterfall & Baja & Alta & Baja \\
+\hline
+Lean & Media & Baja & Alta \\
+\hline
+Black Belt & Media & Alta & Media \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Conclusiones}
+
+La elección de una metodología de manejo de proyectos depende de múltiples factores:
+\begin{itemize}
+    \item Naturaleza del proyecto
+    \item Tamaño y experiencia del equipo
+    \item Requisitos de cambio esperados
+    \item Restricciones de tiempo y presupuesto
+    \item Necesidades de documentación
+\end{itemize}
+
+Un proyecto de software exitoso requiere seleccionar la metodología más adecuada o hibridar varias metodologías según las necesidades específicas del contexto.
+
+\end{document}
