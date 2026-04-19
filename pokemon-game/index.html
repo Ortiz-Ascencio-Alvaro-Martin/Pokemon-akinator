@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokémon Adivina Quién - Kanto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Música de fondo 8-bits -->
+    <audio id="background-music" loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="simple-akinator">
+      <h1>🎮 Pokémon Adivina Quién (Kanto) 🎮</h1>
+      <div id="question-text">Piensa en un Pokémon de la primera generación y presiona "SÍ" o "NO" para comenzar.</div>
+      <div class="simple-question-panel">
+        <div id="question"></div>
+        <div class="btn-group">
+          <button id="yes-btn" disabled class="btn-yes">SÍ</button>
+          <button id="no-btn" disabled class="btn-no">NO</button>
+          <button id="restart-btn" class="btn-restart">Reiniciar</button>
+          <button id="sound-toggle" class="btn-sound" title="Silenciar/Activar sonido">🔊</button>
+        </div>
+      </div>
+      <div id="pokemon-grid" class="simple-pokemon-grid"></div>
+    </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
