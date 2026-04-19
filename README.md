@@ -1,6 +1,24 @@
-# 🎮 Pokémon Adivina Quién - Generación Kanto
+# 📚 SE - Segundo Parcial
 
-> Un juego interactivo estilo **Akinator** para adivinar Pokémon de la Primera Generación usando preguntas inteligentes.
+**Estudiante**: Alvaro Martin Ortiz Ascencio  
+**Matrícula**: 23110160  
+**Grupo**: 7E
+
+---
+
+## 📂 Contenido del Repositorio
+
+### 1️⃣ Pokémon Adivina Quién (Sistema Experto)
+🎮 **Juego interactivo estilo Akinator** para adivinar Pokémon de la Primera Generación usando preguntas inteligentes basadas en arquitectura de **Sistema Experto**.
+
+### 2️⃣ Análisis de Arquitectura de Sistema Experto
+📋 Documentación completa sobre la arquitectura, componentes y funcionamiento de sistemas expertos.
+
+---
+
+## 🎮 Pokémon Adivina Quién - Generación Kanto
+
+> Un juego interactivo que implementa la arquitectura de un **Sistema Experto** para adivinar Pokémon mediante preguntas heurísticas.
 
 ## 📋 Tabla de Contenidos
 
@@ -271,3 +289,106 @@ Proyecto desarrollado como demostración de:
 ---
 
 **¿Disfrutaste el juego?** 🎮 ¡Desafía a tus amigos a pensar en Pokémon!
+
+---
+
+## 🏗️ Arquitectura de Sistema Experto
+
+### Componentes Principales
+
+Este proyecto implementa una **arquitectura clásica de Sistema Experto** con los siguientes componentes:
+
+#### 1. **Módulo de Adquisición de Conocimiento**
+- **Qué**: Recopila datos sobre Pokémon (atributos, características)
+- **Para qué**: Construir la base de conocimiento del sistema
+- **Cómo**: Array de datos estructurados con 151 Pokémon y 12 atributos cada uno
+
+```javascript
+// Ejemplo: Bulbasaur
+[1, "bulbasaur", "planta", "veneno", "verde", true, false, "pradera", 6.9, 0.7, "monstruo", "común"]
+```
+
+#### 2. **Base de Conocimiento**
+- **Qué**: Almacena todos los hechos sobre Pokémon
+- **Para qué**: Referencia para las inferencias del motor de reglas
+- **Cómo**: `kantoData[]` - datos estructurados + metadatos normalizados
+
+#### 3. **Motor de Inferencia**
+- **Qué**: Selecciona la pregunta óptima usando entropía de Shannon
+- **Para qué**: Dividir el espacio de soluciones eficientemente
+- **Cómo**: 
+  ```javascript
+  function pickBestQuestion() {
+    // Calcula H(p) = -p*log2(p) - (1-p)*log2(1-p)
+    // Selecciona pregunta con máxima entropía
+  }
+  ```
+
+#### 4. **Módulo de Representación del Conocimiento**
+- **Qué**: Define tipos de preguntas y atributos
+- **Para qué**: Estructurar la búsqueda de forma sistemática
+- **Cómo**: 
+  - Preguntas booleanas (¿Es legendario?)
+  - Preguntas categóricas (¿Es de tipo agua?)
+  - Preguntas continuas (¿Pesa más de 20kg?)
+
+#### 5. **Módulo de Tratamiento del Conocimiento**
+- **Qué**: Procesa respuestas del usuario
+- **Para qué**: Filtrar candidatos basado en la lógica
+- **Cómo**: `handleAnswer()` - filtra array de candidatos
+
+#### 6. **Motor de Explicación**
+- **Qué**: Justifica por qué adivinó cada Pokémon
+- **Para qué**: Aumentar credibilidad del sistema
+- **Cómo**: Muestra atributos matcheados en tooltip
+
+#### 7. **Interfaz de Usuario**
+- **Qué**: Panel de preguntas, grid de candidatos, botones
+- **Para qué**: Interacción intuitiva del usuario
+- **Cómo**: HTML5 + CSS3 + JavaScript vanilla
+
+### Flujo de Ejecución
+
+```
+[Usuario] 
+    ↓
+[Interfaz] → Captura respuesta SÍ/NO
+    ↓
+[Motor de Inferencia] → pickBestQuestion()
+    ↓
+[Base de Conocimiento] → Filtra candidatos
+    ↓
+[Módulo de Tratamiento] → handleAnswer()
+    ↓
+[Representación] → Genera próxima pregunta
+    ↓
+[Interfaz] → Renderiza resultados
+    ↓
+¿Adivinado? → SÍ: Muestra Pokémon | NO: Siguiente pregunta
+```
+
+---
+
+## 📄 Tarea: SE-Segundo Parcial
+
+**Grupo**: 7E  
+**Estudiante**: Alvaro Martin Ortiz Ascencio  
+**Matrícula**: 23110160  
+
+### Entregables
+
+✅ Pokémon Game con arquitectura SE  
+✅ README con análisis técnico  
+✅ Código comentado y optimizado  
+✅ Documentación con LaTeX/KaTeX  
+
+**Archivos generados**:
+- `pokemon-game/` - Código del juego
+- `README.md` - Esta documentación (este archivo)
+- `Tarea 2/` - Análisis de arquitectura del SE
+
+---
+
+**Repositorio**: https://github.com/Ortiz-Ascencio-Alvaro-Martin/Pokemon-akinator  
+**Estado**: ✅ Completado y funcional
+
