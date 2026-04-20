@@ -1,0 +1,424 @@
+═══════════════════════════════════════════════════════════════════════════════
+                        DIAGRAMA DE FLUJO - CLUE ARCANE
+                  Simulador del Juego de Mesa Basado en Arcane
+═══════════════════════════════════════════════════════════════════════════════
+
+FLUJO GENERAL DEL PROGRAMA
+───────────────────────────────────────────────────────────────────────────────
+
+                                  [START]
+                                    │
+                                    ▼
+                        ┌─────────────────────────┐
+                        │  main() - Punto entrada │
+                        └─────────────────────────┘
+                                    │
+                                    ▼
+                    ┌────────────────────────────────┐
+                    │ ClueArcane.__init__()          │
+                    │ - Elegir culpable (random)     │
+                    │ - Elegir locación (random)     │
+                    │ - Elegir arma (random)         │
+                    │ - Inicializar variables        │
+                    └────────────────────────────────┘
+                                    │
+                                    ▼
+                        ┌─────────────────────────┐
+                        │ ejecutar_juego()        │
+                        │ BUCLE PRINCIPAL         │
+                        └─────────────────────────┘
+                                    │
+                                    ▼
+                        ┌─────────────────────────┐
+                        │ mostrar_menu_principal()│
+                        │ Mostrar 5 opciones      │
+                        └─────────────────────────┘
+                                    │
+                ┌───────────────┬───┴────┬─────────┬──────────┬──────────┐
+                │               │        │         │          │          │
+                ▼               ▼        ▼         ▼          ▼          ▼
+              [1]             [2]      [3]       [4]        [5]      (Loop)
+        Investigar         Interrogar Ver        Emitir    Salir      ↓
+        Locación           Personaje  Pistas   Veredicto del        Return
+        │                  │          │        Juego
+        │                  │          │        │
+        ▼                  ▼          ▼        ▼
+    ┌─────────────┐  ┌────────────┐ │    ┌──────────────┐
+    │OPCIÓN 1     │  │OPCIÓN 2    │ │    │OPCIÓN 4      │
+    │investigar_  │  │interrogar_ │ │    │emitir_       │
+    │locacion()   │  │personaje() │ │    │veredicto()   │
+    └─────────────┘  └────────────┘ │    └──────────────┘
+         │                 │        │           │
+         ▼                 ▼        ▼           ▼
+    ┌─────────────────────────────────────────────────────┐
+    │         MOSTRAR LISTA DE OPCIONES                   │
+    │  Listar Locaciones/Personajes/Pistas disponibles    │
+    └─────────────────────────────────────────────────────┘
+         │                 │        │           │
+         ▼                 ▼        ▼           ▼
+    Usuario selecciona una opción
+         │                 │        │           │
+         ▼                 ▼        ▼           ▼
+    ┌─────────────────────────────────────────────────────┐
+    │        PROCESAR SELECCIÓN DEL USUARIO               │
+    │  Validar entrada (1-5 válido)                       │
+    └─────────────────────────────────────────────────────┘
+         │                 │        ▼           │
+         ▼                 ▼                     ▼
+         │                 │         [Ver Pistas]
+         │                 │              │
+    ┌────┴─────────────┐   │              └─→ Mostrar pistas_descubiertas
+    │¿Ya investigaste? │   │                  Mostrar contador de descartados
+    │                  │   │
+    NO                YES  │
+    │                  │   │
+    ▼                  ▼   │
+┌──────────────┐  Mensaje  │
+│Marcar como   │  "Ya      │
+│investigada   │  investig" │
+└──────────────┘            │
+    │                        │
+    ▼                        │
+┌──────────────────────────────────────────┐
+│ ¿Locación == Locación Correcta?          │
+│ ¿Personaje == Culpable Correcto?         │
+└──────────────────────────────────────────┘
+    │                        │
+   SÍ                        NO
+    │                        │
+    ▼                        ▼
+┌──────────────────┐   ┌──────────────────┐
+│PISTA POSITIVA    │   │DESCARTAR         │
+│Agregar a         │   │- Locación        │
+│pistas_descubiertas│   │- Personaje       │
+│✨ Mensaje        │   │❌ Mensaje        │
+└──────────────────┘   └──────────────────┘
+    │                        │
+    └────────┬───────────────┘
+             │
+             ▼
+    [Volver al Menú Principal]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    FLUJO DETALLADO: OPCIÓN 4 - EMITIR VEREDICTO
+═══════════════════════════════════════════════════════════════════════════════
+
+                        [emitir_veredicto()]
+                                │
+                                ▼
+                    ┌───────────────────────┐
+                    │ Mostrar instrucciones │
+                    │ "Debes acusar 3      │
+                    │  elementos"          │
+                    └───────────────────────┘
+                                │
+                ┌───────────────┴───────────────┐
+                │                               │
+                ▼                               ▼
+        ┌──────────────────┐           ┌──────────────────┐
+        │FASE 1: CULPABLE  │           │FASE 2: LOCACIÓN  │
+        │- Listar personajes           │- Listar locaciones
+        │- Capturar opción │           │- Capturar opción │
+        │- Validar entrada │           │- Validar entrada │
+        └──────────────────┘           └──────────────────┘
+                │                               │
+                ▼                               ▼
+        culpable_acusado                 locacion_acusada
+                │                               │
+                └───────────────┬───────────────┘
+                                │
+                                ▼
+                        ┌──────────────────┐
+                        │FASE 3: ARMA      │
+                        │- Listar armas    │
+                        │- Capturar opción │
+                        │- Validar entrada │
+                        └──────────────────┘
+                                │
+                                ▼
+                        arma_acusada
+                                │
+                                ▼
+        ┌───────────────────────────────────────────────┐
+        │ COMPARAR ACUSACIÓN CON SOLUCIÓN               │
+        │ acusacion_correcta = (                         │
+        │   culpable_acusado == self.culpable AND       │
+        │   locacion_acusada == self.locacion AND       │
+        │   arma_acusada == self.arma                   │
+        │ )                                              │
+        └───────────────────────────────────────────────┘
+                                │
+                        ┌───────┴───────┐
+                        │               │
+                       SÍ              NO
+                        │               │
+                        ▼               ▼
+            ┌─────────────────┐  ┌──────────────────┐
+            │ACUSACIÓN        │  │ACUSACIÓN         │
+            │CORRECTA         │  │INCORRECTA        │
+            │                 │  │                  │
+            │_mostrar_final_  │  │_mostrar_final_   │
+            │ganador()        │  │perdedor()        │
+            └─────────────────┘  └──────────────────┘
+                    │                     │
+                    ▼                     ▼
+        ┌─────────────────────┐  Mostrar solución real
+        │SELECTOR DE HISTÓRICO │  (culpable, locación, arma)
+        │                      │
+        │ if culpable == "Vi"  │
+        │  → _final_vi()       │  Mensaje: "Criminal escapó"
+        │                      │  Mensaje: "Caso sin resolver"
+        │ elif culpable ==     │
+        │      "Jinx"          │  return False
+        │  → _final_jinx()     │
+        │                      │
+        │ elif culpable ==     │
+        │      "Jayce"         │
+        │  → _final_jayce()    │
+        │                      │
+        │ elif culpable ==     │
+        │      "Silco"         │
+        │  → _final_silco()    │
+        │                      │
+        │ elif culpable ==     │
+        │      "Mel Medarda"   │
+        │  → _final_mel()      │
+        └─────────────────────┘
+                    │
+                    ▼
+        ┌─────────────────────┐
+        │MOSTRAR FINAL ÚNICO  │
+        │Narrativa específica │
+        │del culpable         │
+        │                     │
+        │ - Contexto del crimen
+        │ - Motivación        │
+        │ - Sentencia         │
+        │ - Reflexión temática│
+        │                     │
+        │ Ejemplo (Vi):       │
+        │ "La investigación   │
+        │  ha revelado que    │
+        │  Vi actuó por       │
+        │  necesidad..."      │
+        └─────────────────────┘
+                    │
+                    ▼
+            juego_activo = False
+                    │
+                    ▼
+        [Salir del bucle principal]
+                    │
+                    ▼
+                 [END]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    MATRIZ DE FINALES (5 Historias Diferentes)
+═══════════════════════════════════════════════════════════════════════════════
+
+CULPABLE: Vi           → FINAL 1: La Justicia
+────────────────────────────────────────────────────────────────────────────
+Narrativa:   Vi actuó para proteger a Zaun
+Motivación:  Necesidad, justicia de la calle
+Sentencia:   Trabajar bajo vigilancia en Zaun
+Tono:        Heroico, comprensivo
+
+CULPABLE: Jinx         → FINAL 2: El Caos Encarnado
+────────────────────────────────────────────────────────────────────────────
+Narrativa:   Jinx ejecutó un "experimento"
+Motivación:  Caos puro, falta de empatía
+Sentencia:   Prisión de por vida, sin remordimiento
+Tono:        Aterrador, psicótico, sin esperanza
+
+CULPABLE: Jayce        → FINAL 3: La Ambición Sin Límites
+────────────────────────────────────────────────────────────────────────────
+Narrativa:   Jayce elimina obstáculo político
+Motivación:  Poder, control, ambición corrupta
+Sentencia:   Prisión de por vida, caída de Piltover
+Tono:        Traición, corrupción, caída del símbolo
+
+CULPABLE: Silco        → FINAL 4: El Padrino de Zaun
+────────────────────────────────────────────────────────────────────────────
+Narrativa:   Silco: "ajuste de cuentas" empresarial
+Motivación:  "Negocios" sin corazón
+Sentencia:   Prisión, pero imperio continúa
+Tono:        Frío, despiadado, resignado
+
+CULPABLE: Mel Medarda → FINAL 5: La Diplomacia Oscura
+────────────────────────────────────────────────────────────────────────────
+Narrativa:   Mel es agente de Noxus infiltrada
+Motivación:  Estrategia política internacional
+Sentencia:   Desaparece antes de extraditación
+Tono:        Conspiración, política internacional, misterio
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    ESTRUCTURA DE DATOS INTERNA
+═══════════════════════════════════════════════════════════════════════════════
+
+Clase ClueArcane:
+
+Atributos Iniciales:
+├── PERSONAJES (Dict) → 5 personajes con descripciones
+├── LOCACIONES (Dict) → 5 locaciones con descripciones
+├── ARMAS (Dict) → 5 armas con descripciones
+
+Atributos de Instancia:
+├── culpable (str) → Nombre del culpable (random)
+├── locacion (str) → Nombre de la locación (random)
+├── arma (str) → Nombre del arma (random)
+├── pistas_descubiertas (List[str]) → Evidencias encontradas
+├── personajes_descartados (List[str]) → Inocentes
+├── locaciones_descartadas (List[str]) → Locaciones descartadas
+├── armas_descartadas (List[str]) → Armas descartadas (no implementado)
+└── juego_activo (bool) → Control del bucle
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    MÉTODOS PRINCIPALES
+═══════════════════════════════════════════════════════════════════════════════
+
+1. __init__()
+   ├── Selecciona random culpable, locación, arma
+   ├── Inicializa listas vacías de descubrimientos
+   └── Establece juego_activo = True
+
+2. ejecutar_juego()
+   ├── Muestra introducción
+   ├── LOOP WHILE juego_activo:
+   │   ├── mostrar_menu_principal() → int opción
+   │   ├── if opción == 1: investigar_locacion()
+   │   ├── elif opción == 2: interrogar_personaje()
+   │   ├── elif opción == 3: ver_pistas()
+   │   ├── elif opción == 4: emitir_veredicto()
+   │   │   └── if ganador: MOSTRAR FINAL
+   │   │   └── else: MOSTRAR DERROTA
+   │   │   └── juego_activo = False
+   │   └── elif opción == 5: juego_activo = False
+   └── END LOOP
+
+3. investigar_locacion()
+   ├── Mostrar lista de locaciones
+   ├── Capturar selección
+   ├── _processar_investigacion_locacion(locacion)
+   │   ├── if ya investigada: Mensaje
+   │   ├── else:
+   │   │   ├── Marcar como investigada
+   │   │   ├── if locacion == self.locacion:
+   │   │   │   └── PISTA POSITIVA
+   │   │   └── else:
+   │   │       └── Descartar
+   └── Return
+
+4. interrogar_personaje()
+   ├── Mostrar lista de personajes
+   ├── Capturar selección
+   ├── _processar_interrogatorio(personaje)
+   │   ├── if ya interrogado: Mensaje
+   │   ├── else:
+   │   │   ├── Marcar como interrogado
+   │   │   ├── if personaje == self.culpable:
+   │   │   │   └── PISTA INCRIMINATORIA
+   │   │   └── else:
+   │   │       └── Descartar
+   └── Return
+
+5. ver_pistas()
+   ├── if pistas_descubiertas vacía:
+   │   └── "Sin pistas aún"
+   ├── else:
+   │   └── Mostrar todas las pistas
+   └── Mostrar contador de descartados
+
+6. emitir_veredicto() → bool
+   ├── Capturar culpable_acusado
+   ├── Capturar locacion_acusada
+   ├── Capturar arma_acusada
+   ├── acusacion_correcta = comparación
+   ├── if acusacion_correcta:
+   │   ├── _mostrar_final_ganador()
+   │   └── return True
+   ├── else:
+   │   ├── _mostrar_final_perdedor()
+   │   └── return False
+   └── juego_activo = False
+
+7. _mostrar_final_ganador(culpable, locacion, arma)
+   ├── Dict con 5 lambdas → _final_vi(), _final_jinx(), etc.
+   ├── Ejecutar método correspondiente
+   └── Mostrar narrativa única
+
+8. _final_*() (5 métodos)
+   └── Cada uno muestra una historia narrativa diferente
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    FLUJO DE VALIDACIÓN DE ENTRADA
+═══════════════════════════════════════════════════════════════════════════════
+
+Usuario ingresa número:
+    │
+    ▼
+try:
+    opcion = int(input(...))
+    if 1 <= opcion <= 5:
+        return opcion
+    else:
+        ❌ "Opción inválida"
+except ValueError:
+    ❌ "Debes ingresar un número"
+    (Loop nuevamente)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    EJEMPLO DE EJECUCIÓN COMPLETA
+═══════════════════════════════════════════════════════════════════════════════
+
+Estado inicial:
+  culpable = "Jinx" (random)
+  locacion = "The Last Drop" (random)
+  arma = "Lanzacohetes Espinas" (random)
+
+RONDA 1:
+  Menú → Opción 1: Investigar
+  Seleccionar: "Laboratorio Hextech"
+  Resultado: ❌ No investigada → Descartada
+  Estado: locaciones_descartadas = ["Laboratorio Hextech"]
+
+RONDA 2:
+  Menú → Opción 2: Interrogar
+  Seleccionar: "Vi"
+  Resultado: ❌ No es culpable → Descartada
+  Estado: personajes_descartados = ["Vi"]
+
+RONDA 3:
+  Menú → Opción 2: Interrogar
+  Seleccionar: "Jinx"
+  Resultado: ✨ PISTA INCRIMINATORIA
+  Estado: pistas_descubiertas = ["Jinx muestra comportamiento sospechoso"]
+
+RONDA 4:
+  Menú → Opción 1: Investigar
+  Seleccionar: "The Last Drop"
+  Resultado: ✨ PISTA POSITIVA
+  Estado: pistas_descubiertas = [..., "Evidencia en The Last Drop"]
+
+RONDA 5:
+  Menú → Opción 4: Emitir Veredicto
+  Culpable: Jinx
+  Locación: The Last Drop
+  Arma: Lanzacohetes Espinas
+  
+  Acusación correcta ✓✓✓
+  
+  Mostrar FINAL 2: JINX - El Caos Encarnado
+  
+  Narrativa específica se despliega...
+  
+  juego_activo = False
+  JUEGO TERMINA
+
+
+═══════════════════════════════════════════════════════════════════════════════

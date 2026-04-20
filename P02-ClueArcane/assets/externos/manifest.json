@@ -1,0 +1,138 @@
+{
+  "fuente": "Openverse + Wikimedia Commons",
+  "generado_utc": "2026-04-20T00:56:24.255401+00:00",
+  "assets": [
+    {
+      "slot": "locacion_hextech",
+      "tipo": "imagen",
+      "archivo": "locacion_hextech.jpg",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "locacion_last_drop",
+      "tipo": "imagen",
+      "archivo": "locacion_last_drop.png",
+      "consulta": "fallback_local",
+      "source_url": "",
+      "description_url": "",
+      "license": "interno_proyecto",
+      "artist": "generar_recursos.py",
+      "credit": "asset local de respaldo"
+    },
+    {
+      "slot": "locacion_consejo",
+      "tipo": "imagen",
+      "archivo": "locacion_consejo.png",
+      "consulta": "fallback_local",
+      "source_url": "",
+      "description_url": "",
+      "license": "interno_proyecto",
+      "artist": "generar_recursos.py",
+      "credit": "asset local de respaldo"
+    },
+    {
+      "slot": "locacion_puente",
+      "tipo": "imagen",
+      "archivo": "locacion_puente.png",
+      "consulta": "fallback_local",
+      "source_url": "",
+      "description_url": "",
+      "license": "interno_proyecto",
+      "artist": "generar_recursos.py",
+      "credit": "asset local de respaldo"
+    },
+    {
+      "slot": "locacion_prision",
+      "tipo": "imagen",
+      "archivo": "locacion_prision.jpg",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "musica_fondo",
+      "tipo": "audio",
+      "archivo": "musica_fondo.mp3",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "pista_buena",
+      "tipo": "audio",
+      "archivo": "pista_buena.wav",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "error",
+      "tipo": "audio",
+      "archivo": "error.mp3",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "investigacion",
+      "tipo": "audio",
+      "archivo": "investigacion.mp3",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "interrogatorio",
+      "tipo": "audio",
+      "archivo": "interrogatorio.mp3",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "victoria",
+      "tipo": "audio",
+      "archivo": "victoria.mp3",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    },
+    {
+      "slot": "derrota",
+      "tipo": "audio",
+      "archivo": "derrota.mp3",
+      "consulta": "existente_previo",
+      "source_url": "",
+      "description_url": "",
+      "license": "desconocida",
+      "artist": "",
+      "credit": "asset existente"
+    }
+  ]
+}
