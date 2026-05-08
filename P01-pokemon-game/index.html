@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pokémon Adivina Quién - Kanto</title>
+  <title>Pokémon Adivina Quién - Con Aprendizaje</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
     </audio>
 
     <div class="simple-akinator">
-      <h1>🎮 Pokémon Adivina Quién (Kanto) 🎮</h1>
-      <div id="question-text">Piensa en un Pokémon de la primera generación y presiona "SÍ" o "NO" para comenzar.</div>
+      <h1>🎮 Pokémon Adivina Quién (Con Aprendizaje) 🎮</h1>
+      <div id="question-text">Piensa en un Pokémon y presiona "SÍ" o "NO" para comenzar.</div>
       <div class="simple-question-panel">
         <div id="question"></div>
         <div class="btn-group">
@@ -24,9 +24,31 @@
           <button id="sound-toggle" class="btn-sound" title="Silenciar/Activar sonido">🔊</button>
         </div>
       </div>
+      
+      <!-- Modal para preguntar Pokémon desconocido -->
+      <div id="learning-modal" class="modal hidden">
+        <div class="modal-content">
+          <h2>¿Cuál era tu Pokémon? 🤔</h2>
+          <p id="learning-question">Escribe el nombre del Pokémon que pensabas.</p>
+          <p>No pude adivinarlo. Ayúdame a aprender escribiendo su nombre:</p>
+          <input type="text" id="pokemon-input" placeholder="Ej: Pikachu, Charizard...">
+          <button id="submit-pokemon" class="btn-confirm">Confirmar</button>
+          <div id="learning-confirmation" class="learning-confirmation hidden">
+            <button id="confirm-pokemon" class="btn-confirm">Sí, era ese</button>
+            <button id="edit-pokemon" class="btn-cancel">No, cambiar</button>
+          </div>
+          <button id="cancel-learning" class="btn-cancel">Cancelar</button>
+          <div id="fuzzy-suggestions" class="suggestions hidden">
+            <p>¿Quisiste decir...?</p>
+            <div id="suggestion-list"></div>
+          </div>
+        </div>
+      </div>
+      
       <div id="pokemon-grid" class="simple-pokemon-grid"></div>
     </div>
 
-  <script src="script.js"></script>
+  <script src="pokemon-db.js"></script>
+  <script src="script-improved.js"></script>
 </body>
 </html>
